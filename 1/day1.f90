@@ -2,7 +2,8 @@ program day1
 
   implicit none
 
-  integer, dimension(2000) :: input
+  integer, parameter :: N = 2000
+  integer, dimension(N) :: input
   integer :: i, p1total, p2total
 
   open (unit = 1, file = "input.txt")
@@ -12,12 +13,10 @@ program day1
 
   do i = 1,size(input)
       read(1,*) input(i)
-      if(i >= 2 .and. input(i) > input(i-1)) p1total = p1total + 1
-      if(i >= 4 .and. sum(input(i-2:i)) > sum(input(i-3:i-1))) p2total = p2total + 1
   end do
 
-  write (*,*) "part 1:", p1total
-  write (*,*) "part 2:", p2total
-  
+  WRITE(*,'(A,I0)') "Part 1: ", COUNT(INPUT(1:N-1).LT.INPUT(2:N))
+  WRITE(*,'(A,I0)') "Part 2: ", COUNT(INPUT(1:N-3).LT.INPUT(4:N))
+
 
 end program day1

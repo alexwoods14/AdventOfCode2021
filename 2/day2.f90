@@ -1,4 +1,4 @@
-program day1
+program day2
 
   implicit none
 
@@ -43,4 +43,4 @@ program day1
   write (*,*) "part2:", horizontal*vertical
 
 
-end program day1
+end program day2

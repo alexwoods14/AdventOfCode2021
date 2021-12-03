@@ -25,7 +25,7 @@ program day3
 !  write (*,*) inputs(:,3)
 
   do j = 1,L
-  counts(j) = count(inputs(j,:) == 1)
+    counts(j) = count(inputs(j,:) == 1)
   end do
 
   gr(:) = 0
@@ -67,7 +67,7 @@ program day3
   csr = bin_to_dec(inputs(:,findloc(keep, .true.)))
 
 
-  write(*,*) "part2", csr*ogr
+  write(*,*) "part 2", csr*ogr
   
 contains
   integer function bin_to_dec(bin)

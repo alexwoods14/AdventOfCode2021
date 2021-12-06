@@ -9,6 +9,8 @@ program day6
 
   open(1,file="input.txt")
   N=1
+
+  ! also shamlessly stolen from u/autid due to still figuring out fortran inputs
   do
     read(1,'(A)',advance="no",iostat=ierr) A
     if (ierr.NE.0) exit

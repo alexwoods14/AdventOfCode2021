@@ -30,10 +30,8 @@ program day6
   end do
 
   do i = 1, 256
-    new(0:7) = days(1:8)
-    new(6) = new(6) + days(0)
-    new(8) = days(0)
-    days = new
+    days = cshift(days, 1)
+    days(6) = days(6) + days(8)
   end do
 
   write(*,*) sum(days)

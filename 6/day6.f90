@@ -1,11 +1,15 @@
 program day6
+  use omp_lib
   implicit none
 
   integer, allocatable, dimension(:) :: input
   integer(kind=8), dimension(0:8) :: days, new
+  double precision :: stime, etime
 
   integer :: ierr, N, i
   character :: A
+
+  stime = omp_get_wtime()
 
   open(1,file="input.txt")
   N=1
@@ -36,6 +40,9 @@ program day6
 
   write(*,*) sum(days)
 
+  etime = omp_get_wtime()
+
+  write(*,*) "time =", etime-stime, "s"
 
 
 end program day6

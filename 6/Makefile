@@ -1,5 +1,5 @@
 FC=				ifort
-FFLAGS=		-O3 -g
+FFLAGS=		-O3 -qopenmp
 
 
 SRC=			day6.f90

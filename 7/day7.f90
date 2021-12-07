@@ -46,6 +46,8 @@ program day7
   etime = omp_get_wtime()
   write(*,*) "took:", etime-stime, "seconds"
 
+  deallocate(input)
+
 
 contains
   recursive subroutine qsort(array, low, high)

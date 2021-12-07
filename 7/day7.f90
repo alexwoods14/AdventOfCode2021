@@ -14,7 +14,6 @@ program day7
   open(1,file="input.txt")
   N=1
 
-  ! also shamlessly stolen from u/autid due to still figuring out fortran inputs
   do
     read(1,'(A)',advance="no",iostat=ierr) A
     if (ierr.NE.0) exit
@@ -31,17 +30,18 @@ program day7
   etime = omp_get_wtime()
   write(*,*) "took:", etime-stime, "seconds"
 
+
   ! part 2
   mean = NINT(real(sum(input))/size(input))
   minfuel = huge(minfuel)
   fuel = 0
-  do i = -1, 1
+  do i = -1, 1 ! median is 464.56 but min value is actually 464 not 465 as mean evaluates to
     do j = 1, N
       fuel = fuel + part2move(input(j), mean+i)
     end do
     minfuel = min(minfuel,fuel)
   end do
-  
+
   write(*,*) "part 2:", minfuel
   etime = omp_get_wtime()
   write(*,*) "took:", etime-stime, "seconds"
@@ -99,10 +99,7 @@ contains
 
   function part2move(src, dest)
     integer :: src, dest, part2move, i
-    part2move = 0
-    do i = 1, abs(dest-src)
-      part2move = part2move + i
-    end do
+    part2move = abs(dest-src)*(abs(dest-src) + 1) / 2;
   end function part2move
 
 end program day7

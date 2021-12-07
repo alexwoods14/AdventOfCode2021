@@ -6,7 +6,7 @@ program day7
   integer(kind=8), dimension(0:8) :: days, new
   double precision :: stime, etime
 
-  integer :: ierr, N, i
+  integer :: ierr, N, i, mean, fuel, j, k, minfuel
   character :: A
 
   stime = omp_get_wtime()
@@ -25,17 +25,27 @@ program day7
   allocate(input(N))
   read(1, *) input
 
-
-!  write(*,fmt="(10i3)") input
+  ! part 1
   call qsort(input, 1, N)
-!  write(*,fmt="(10i3)") input
-!  write(*,*) median(input)
-
-write(*,*) "part 1:", sum(abs(input - median(input)))
-
-
+  write(*,*) "part 1:", sum(abs(input - median(input)))
   etime = omp_get_wtime()
-  write(*,*) "time =", etime-stime, "s"
+  write(*,*) "took:", etime-stime, "seconds"
+
+  ! part 2
+  mean = NINT(real(sum(input))/size(input))
+  minfuel = huge(minfuel)
+  fuel = 0
+  do i = -1, 1
+    do j = 1, N
+      fuel = fuel + part2move(input(j), mean+i)
+    end do
+    minfuel = min(minfuel,fuel)
+  end do
+  
+  write(*,*) "part 2:", minfuel
+  etime = omp_get_wtime()
+  write(*,*) "took:", etime-stime, "seconds"
+
 
 contains
   recursive subroutine qsort(array, low, high)
@@ -87,6 +97,12 @@ contains
     end if
   end function median
 
-
+  function part2move(src, dest)
+    integer :: src, dest, part2move, i
+    part2move = 0
+    do i = 1, abs(dest-src)
+      part2move = part2move + i
+    end do
+  end function part2move
 
 end program day7

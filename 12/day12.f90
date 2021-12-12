@@ -48,6 +48,8 @@ program day12
   num = 0
   call paths(stack, sum(findloc(caveids,"start")))
   write(*,*) "Part 1:", num
+  etime = omp_get_wtime()
+  write(*,*) "Took:", etime-stime, "seconds"
   
  
   num = 0
@@ -56,6 +58,8 @@ program day12
   call pathspart2(stack, sum(findloc(caveids,"start")))
 
   write(*,*) "Part 2:", num
+  etime = omp_get_wtime()
+  write(*,*) "Took:", etime-stime, "seconds"
   
   deallocate(input)
   deallocate(caveids)

@@ -1,6 +1,6 @@
 *.o
 *.mod
-testinput.txt
+testinput*.txt
 day1
 day2
 day3

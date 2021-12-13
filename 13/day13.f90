@@ -74,7 +74,7 @@ program day13
   end do
 
   allocate(readable(0:minx-1,0:miny-1))
-  readable = '.'
+  readable = ' '
   where (map(0:minx-1,0:miny-1)==.true.) readable = '#'
 
   WRITE(FMT,'("(", I0, "A1)")') minx

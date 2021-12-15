@@ -13,7 +13,6 @@ program day14
   character :: A
   character*25 :: template
 
-  stime = omp_get_wtime()
   open(1,file="input.txt")
   N=0
   read(1,*) template ! input
@@ -36,6 +35,8 @@ program day14
   do i = 1, N
     read(1, *) states(i), A, insert(i)
   end do
+  
+  stime = omp_get_wtime()
 
   call init_character_counts(chars, charcounts, charidx, states)
   call generate_transitions(transitions, states, insert, chars)

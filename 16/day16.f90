@@ -28,7 +28,6 @@ program day16
   close(1)
 
   stime = omp_get_wtime()
-  write(*,*) size(packet)
   versionsum = 0
   versionsum = versionsum + bintodec(packet(1:3))
 

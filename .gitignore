@@ -1,6 +1,7 @@
 *.o
 *.mod
 testinput*.txt
+runall
 day1
 day2
 day3

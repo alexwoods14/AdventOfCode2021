@@ -6,8 +6,7 @@ program day1
   double precision :: stime, etime
 !  integer, parameter :: minY = -10, maxY = -5, minX = 20, maxX = 30
   integer, parameter :: minY = -114, maxY = -75, minX = 153, maxX = 199
-  integer :: i, u, v, s, s2, maxs, xv, sx, countin, steps, tempv
-  logical :: used(1000)
+  integer :: i, u, v, s, s2, maxs, xv, sx, countin, steps, yv, xs, ys
 
   countin = 0
   stime = OMP_get_wtime()
@@ -35,45 +34,62 @@ program day1
 
   write(*,'(A, I0)') "Part 1: ", maxs
   etime = OMP_get_wtime()
-  write(*,'(A, F5.3," ms")') "Part 1: ", (etime-stime)*1000
+  write(*,'(A, F7.3," ms")') "Part 1: ", (etime-stime)*1000
   
-  write(*,'(A, I0)') "Part 2: ", countin
-  etime = OMP_get_wtime()
-  write(*,'(A, F5.3," ms")') "Part 1: ", (etime-stime)*1000
-  
-  do u = 0, -10000, -1
-    tempv = u
-    s = 0
-!    do steps = 1, 1000
-    steps = 0
-    used = .false.
-    do while(s >= minY)
-      steps = steps + 1
-      s = s + tempv
-      tempv = tempv - 1
-    !if(u == 0) write(*,*) "s=", s, "steps=", steps
+!  do u = 0, -10000, -1
+!    tempv = u
+!    s = 0
+!!    do steps = 1, 1000
+!    steps = 0
+!    used = .false.
+!    do while(s >= minY)
+!      steps = steps + 1
+!      s = s + tempv
+!      tempv = tempv - 1
+!    !if(u == 0) write(*,*) "s=", s, "steps=", steps
+!
+!      if(s >= minY .and. s <= maxY) then
+!!      write(*,*) "u=", u, "s=", s, "steps=", steps
+!      do xv = 0, steps+(maxX-minX)+10000
+!        sx = xv*(xv+1)/2 - (xv-steps)*(xv-steps+1)/2
+!        if (xv < steps) sx = xv*(xv+1)/2
+!          if (sx >= minX .and. sx <= maxX .and. .not. used(xv)) then
+!            used(xv) = .true.
+!            countin = countin+1
+!!            write(*,'(I0,",",I0)') xv, u
+!            cycle
+!          end if
+!      end do 
+!    end if
+!    end do
+!  end do
 
-      if(s >= minY .and. s <= maxY) then
-!      write(*,*) "u=", u, "s=", s, "steps=", steps
-      do xv = 0, steps+(maxX-minX)+10000
-        sx = xv*(xv+1)/2 - (xv-steps)*(xv-steps+1)/2
-        if (xv < steps) sx = xv*(xv+1)/2
-          if (sx >= minX .and. sx <= maxX .and. .not. used(xv)) then
-            used(xv) = .true.
-            countin = countin+1
-!            write(*,'(I0,",",I0)') xv, u
-            cycle
-          end if
+  countin = 0
+  do u = 0, maxX
+  vvec: do v = -1000, 1000
+      xv = u
+      xs = 0
+      yv = v
+      ys = 0
+      do while (xs <= maxx .and. ys >= minY)
+        xs = xs + xv
+        ys = ys + yv
+        xv = max(xv-1, 0)
+        yv = yv - 1
+        if (xs >= minx .and. xs <= maxx .and. ys <= maxY .and. ys >= minY) then
+!          write(*,'(I0,",",I0)') u,v
+          countin = countin + 1
+          cycle vvec
+        end if
       end do 
-    end if
-    end do
+    end do vvec
   end do
 
 
 
   write(*,'(A, I0)') "Part 2: ", countin
   etime = OMP_get_wtime()
-  write(*,'(A, F5.3," ms")') "Part 1: ", (etime-stime)*1000
+  write(*,'(A, F7.3," ms")') "Part 1: ", (etime-stime)*1000
 
 
 

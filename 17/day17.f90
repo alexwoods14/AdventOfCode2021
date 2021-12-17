@@ -66,7 +66,7 @@ program day1
 
   countin = 0
   do u = 0, maxX
-  vvec: do v = -1000, 1000
+  vvec: do v = miny, -miny
       xv = u
       xs = 0
       yv = v

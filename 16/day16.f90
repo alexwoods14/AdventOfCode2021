@@ -41,6 +41,7 @@ program day16
   write(*,*) "Part 2:", res(3)
   etime = omp_get_wtime()
   write(*,*) "time =", etime-stime, "s"
+  write(*,'(A, F5.3," ms")') "Took: ", (etime-stime)*1000
   
 
   deallocate(packet)
